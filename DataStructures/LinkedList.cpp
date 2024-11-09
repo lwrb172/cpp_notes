@@ -24,6 +24,39 @@ void printList(Node* n) {
     }
 }
 
+void insertAtTheFront(Node** head, int value) {
+    Node* node = new Node();
+    node->value = value;
+    node->next = *head;
+    *head = node;
+}
+
+void insertAtTheEnd(Node** head, int value) {
+    Node* node = new Node();
+    node->value = value;
+    node->next = nullptr;
+    if (*head == nullptr) {
+        *head = node;
+        return;
+    }
+    Node* last = *head;
+    while (last->next != nullptr) {
+        last = last->next;
+    }
+    last->next = node;
+}
+
+void insertAfter(Node* previous, int value) {
+    if (previous == nullptr) {
+        cout << "previous cannot be NULL";
+        return;
+    }
+    Node* node = new Node();
+    node->value = value;
+    node->next = previous->next;
+    previous->next = node;
+}
+
 int main() {
     Node* head = new Node();
     Node* second = new Node();
@@ -36,6 +69,12 @@ int main() {
     third->value = 3;
     third->next = nullptr;
 
+    insertAtTheFront(&head, -1);
+    insertAtTheFront(&head, -2);
+    insertAtTheEnd(&head, 4);
+    insertAtTheEnd(&head, 5);
+    insertAfter(head, -1);
+    insertAfter(second, 2);
     printList(head);
 
     return 0;
