@@ -44,6 +44,54 @@ public:
         }
     }
 
+    void removeFront() {
+        if (head == nullptr) {
+            cout << "List is empty!" << endl;
+            return;
+        }
+        Node* tmp = head;
+        if (head == tail) {
+            head = tail = nullptr;
+        } else {
+            head = head->next;
+            head->prev = nullptr;
+        }
+        delete tmp;
+    }
+
+    void removeEnd() {
+        if (tail == nullptr) {
+            cout << "List is empty" << endl;
+            return;
+        }
+        Node* tmp = tail;
+        if (head == tail) {
+            head = tail = nullptr;
+        } else {
+            tail = tail->prev;
+            tail->next = nullptr;
+        }
+        delete tmp;
+    }
+
+    void clear() {
+        while (head != nullptr) {
+            Node* tmp = head;
+            head = head->next;
+            delete tmp;
+        }
+    }
+
+    int length() { // make size variable for improved performance
+        int result = 0;
+        Node* curr = head;
+        while (curr != nullptr) {
+            result++;
+            curr = curr->next;
+        }
+        return result;
+    }
+
     void print() {
         cout << "nullptr <- ";
         Node* curr = head;
@@ -59,35 +107,20 @@ public:
     }
 };
 
-struct Node {
-    int value;
-    Node* next;
-    Node* previous;
-};
-
-void printForward(Node* head) {
-    Node* traverser = head;
-    while (traverser != nullptr) {
-        cout << traverser->value << endl;
-        traverser = traverser->next;
-    }
-}
-
-void printBackwards(Node* tail) {
-    Node* traverser = tail;
-    while (traverser != nullptr) {
-        cout << traverser->value << endl;
-        traverser = traverser->previous;
-    }
-}
-
 int main() {
     DoublyLinkedList list;
     list.push(3);
     list.push(2);
     list.push(1);
+    list.push(0); // removed first
     list.addTail(4);
     list.addTail(5);
+    list.addTail(6); // removed last
+
+    list.removeEnd();
+    list.removeFront();
+    cout << list.length() << endl; // 5
+
     
     list.print();
     // output: nullptr <- 1 <-> 2 <-> 3 <-> 4 <-> 5 -> nullptr
