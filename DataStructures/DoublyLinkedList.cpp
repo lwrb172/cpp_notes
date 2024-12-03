@@ -9,6 +9,56 @@
 #include <iostream>
 using namespace std;
 
+class DoublyLinkedList {
+    struct Node {
+        int data;
+        Node* prev;
+        Node* next;
+
+        Node(int value) : data(value), prev(nullptr), next(nullptr) {}
+    };
+    Node* head;
+    Node* tail;
+public:
+    DoublyLinkedList() : head(nullptr), tail(nullptr) {}
+
+    void push(int value) {
+        Node* newNode = new Node(value);
+        if (head == nullptr) {
+            head = tail = newNode;
+        } else {
+            newNode->next = head;
+            head->prev = newNode;
+            head = newNode;
+        }
+    }
+
+    void addTail(int value) {
+        Node* newNode = new Node(value);
+        if (head == nullptr) {
+            head = tail = newNode;
+        } else {
+            newNode->prev = tail;
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    void print() {
+        cout << "nullptr <- ";
+        Node* curr = head;
+        while (curr != nullptr) {
+            cout << curr->data;
+            if (curr->next != nullptr) {
+                cout << " <-> ";
+            } else {
+                cout << " -> nullptr";
+            }
+            curr = curr->next;
+        }
+    }
+};
+
 struct Node {
     int value;
     Node* next;
@@ -32,44 +82,15 @@ void printBackwards(Node* tail) {
 }
 
 int main() {
-    Node* head;
-    Node* tail;
-
-    // add 1st node
-    Node* node = new Node;
-    node->value = 4;
-    node->next = nullptr;
-    node->previous = nullptr;
+    DoublyLinkedList list;
+    list.push(3);
+    list.push(2);
+    list.push(1);
+    list.addTail(4);
+    list.addTail(5);
     
-    head = node;
-    tail = node;
-
-    // add 2nd node
-    node = new Node();
-    node->value = 5;
-    node->next = nullptr;
-    node->previous = tail;
-    tail->next = node;
-    tail = node;
-
-    // add 3rd node
-    node = new Node();
-    node->value = 6;
-    node->next = nullptr;
-    node->previous = tail;
-    tail->next = node;
-    tail = node;
-
-    // add 4rd node
-    node = new Node();
-    node->value = 7;
-    node->next = nullptr;
-    node->previous = tail;
-    tail->next = node;
-    tail = node;
-
-    printForward(head);
-    printBackwards(tail);
+    list.print();
+    // output: nullptr <- 1 <-> 2 <-> 3 <-> 4 <-> 5 -> nullptr
 
     return 0;
 }
