@@ -1,3 +1,17 @@
+/*
+    A binary tree is a hierarchical data structure in which each node
+    has at most two children, commonly referred to as the left child and
+    the right child. The topmost node of the tree is known as the root node,
+    which serves as the starting point for accessing all other nodes int
+    the tree.
+
+    Binary trees are widely used for:
+    - searching
+    - sorting
+    - hierarchical data representation
+
+*/
+
 #include <iostream>
 using namespace std;
 
@@ -16,15 +30,27 @@ Node* createNode(int data) {
 
 // Preorder traversal (root, left, right)
 void preorderTraversal(Node* node) {
-    if (node == nullptr) {
-        return;
-    }
+    if (node == nullptr) return;
     // Visit the root node
-    cout << node->data << " ";
+    cout << node->data << ' ';
     // Recursively visit the left subtree
     preorderTraversal(node->left);
     // Recursively visit the right subtree
     preorderTraversal(node->right);
+}
+
+void inorderTraversal(Node* node) {
+    if (node == nullptr) return;
+    inorderTraversal(node->left);
+    cout << node->data << ' ';
+    inorderTraversal(node->right);
+}
+
+void postorderTraversal(Node* node) {
+    if (node == nullptr) return;
+    postorderTraversal(node->left);
+    postorderTraversal(node->right);
+    cout << node->data << ' ';
 }
 
 int main() {
