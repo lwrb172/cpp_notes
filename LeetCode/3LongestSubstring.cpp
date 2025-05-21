@@ -29,7 +29,7 @@ int main() {
     Solution* solution = new Solution;
     string s = "abcabcbb";
     int len = solution->lengthOfLongestSubstring(s);
-    std::cout << len << std::endl;
+    cout << len << endl;
 
     return 0;
 }

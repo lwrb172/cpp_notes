@@ -46,10 +46,9 @@ int main() {
 
     ListNode* result = s->addTwoNumbers(l1, l2);
     while (result != nullptr) {
-        std::cout << result->val << std::endl;
+        cout << result->val << endl;
         result = result->next;
     }
 
     return 0;
 }
-
