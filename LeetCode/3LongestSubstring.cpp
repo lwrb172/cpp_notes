@@ -26,9 +26,9 @@ public:
 };
 
 int main() {
-    Solution* solution = new Solution;
-    string s = "abcabcbb";
-    int len = solution->lengthOfLongestSubstring(s);
+    Solution s;
+    string str = "abcabcbb";
+    int len = s.lengthOfLongestSubstring(str);
     cout << len << endl;
 
     return 0;

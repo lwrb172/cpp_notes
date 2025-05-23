@@ -26,8 +26,8 @@ public:
 int main() {
     vector<int> vec = {2, 7, 11, 15};
 
-    Solution* s = new Solution;
-    vector<int> result = s->twoSum(vec, 9);
+    Solution s;
+    vector<int> result = s.twoSum(vec, 9);
 
     for (int i = 0; i < result.size(); i++)
         cout << result[i] << endl;
